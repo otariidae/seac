@@ -25,9 +25,6 @@ Linux or macOS:
 seac hello.js hello
 ```
 
-> [!NOTE]
-> currently not working on macOS
-
 ## Technical memo
 
 Seac cannot be compiled to single executable because its denendency esbuild uses uncompilable Node.js feature `require.resolve`.
