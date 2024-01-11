@@ -7,9 +7,18 @@ import * as esbuild from "esbuild"
 
 export const cmd = command({
     name: "seac",
+    description: "single executable application compiler",
     args: {
-        srcPath: positional({ type: FileType, displayName: "source" }),
-        destPath: positional({ type: string, displayName: "destination" }),
+        srcPath: positional({
+            type: FileType,
+            displayName: "source",
+            description: "path to the source file",
+        }),
+        destPath: positional({
+            type: string,
+            displayName: "destination",
+            description: "path to the destination file",
+        }),
     },
     handler: async (args) => {
         // bundle the source file
