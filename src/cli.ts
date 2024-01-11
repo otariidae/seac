@@ -1,4 +1,5 @@
 #!//usr/bin/env node
+import os from "node:os"
 import * as setil from "setil"
 import { command, positional, run, string } from "cmd-ts"
 import { File as FileType } from "cmd-ts/batteries/fs"
@@ -23,7 +24,9 @@ export const cmd = command({
         }
         // compile the bundled code into single executable
         const bundledCode = bundled.outputFiles[0].text
-        await setil.compile(bundledCode, args.destPath)
+        // do not remove the signature of the binary for Linux
+        const noSign = os.type() === "Linux" ? false : true
+        await setil.compile(bundledCode, args.destPath, { noSign })
     },
 })
 
