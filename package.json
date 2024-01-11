@@ -7,7 +7,7 @@
     "build": "tsc",
     "fmt": "biome format --write .",
     "lint": "biome lint .",
-    "test": "ts-node test/cmd.ts"
+    "test": "ts-node test/cli.ts"
   },
   "author": "otariidae",
   "license": "Apache-2.0",
