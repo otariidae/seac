@@ -33,9 +33,9 @@ export const cmd = command({
         }
         // compile the bundled code into single executable
         const bundledCode = bundled.outputFiles[0].text
-        // do not remove the signature of the binary for Linux
-        const noSign = os.type() === "Linux" ? false : true
-        await setil.compile(bundledCode, args.destPath, { noSign })
+        await setil.compile(bundledCode, args.destPath, {
+            noSign: os.type() === "Windows_NT", // remove PE signature only when Windows
+        })
     },
 })
 
