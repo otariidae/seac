@@ -1,4 +1,4 @@
-#!//usr/bin/env node
+#!/usr/bin/env node
 import os from "node:os"
 import * as setil from "setil"
 import { command, positional, run, string } from "cmd-ts"
