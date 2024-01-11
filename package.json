@@ -1,0 +1,28 @@
+{
+  "name": "seac",
+  "description": "single executable application compiler",
+  "version": "0.1.0",
+  "bin": "dist/cli.js",
+  "scripts": {
+    "build": "tsc",
+    "fmt": "biome format --write .",
+    "lint": "biome lint .",
+    "test": "ts-node test/cmd.ts"
+  },
+  "author": "otariidae",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cmd-ts": "^0.13.0",
+    "esbuild": "^0.19.11",
+    "setil": "^0.0.1-a"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.1",
+    "@types/node": "^20.10.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "volta": {
+    "node": "20.10.0"
+  }
+}
