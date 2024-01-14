@@ -1,13 +1,14 @@
-const { command, run, string, positional } = require("cmd-ts")
+const { z } = require("zod")
+const { parser } = require("zod-opts")
 
-const app = command({
-    name: "hello",
-    args: {
-        text: positional({ type: string, displayName: "text" }),
-    },
-    handler: (args) => {
-        console.log(`Hello, ${args.text}!`)
-    },
-})
+const parsed = parser()
+    .name("hello")
+    .args([
+        {
+            type: z.string(),
+            name: "text",
+        },
+    ])
+    .parse()
 
-run(app, process.argv.slice(2))
+console.log(`Hello, ${parsed.text}!`)

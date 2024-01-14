@@ -22,9 +22,9 @@
     "url": "https://github.com/otariidae/seac/issues"
   },
   "dependencies": {
-    "cmd-ts": "^0.13.0",
     "esbuild": "^0.19.11",
-    "setil": "^0.0.1-a"
+    "setil": "^0.0.1-a",
+    "zod-opts": "^0.1.6"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.5.1",

@@ -4,8 +4,7 @@ import fs, { mkdtemp } from "node:fs/promises"
 import os from "node:os"
 import { spawnSync } from "node:child_process"
 import assert from "node:assert/strict"
-import { run } from "cmd-ts"
-import { cmd } from "../src/cli"
+import { run } from "../src/cli"
 
 const osTmpdir = os.tmpdir()
 
@@ -21,7 +20,7 @@ async function withTmpdir(prefix: string) {
 
 async function compileFile(srcFilePath: string, destPath: string) {
     await fs.rm(destPath, { force: true })
-    await run(cmd, [srcFilePath, destPath])
+    await run([srcFilePath, destPath])
 }
 
 test("compile dependency-free common js file", async () => {
