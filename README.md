@@ -1,5 +1,9 @@
 # seac: Single Executable Application Compiler
 
+[![NPM Version](https://img.shields.io/npm/v/seac)](https://www.npmjs.com/package/seac)
+[![GitHub License](https://img.shields.io/github/license/otariidae/seac)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Node.js CI](https://github.com/otariidae/seac/actions/workflows/node.js.yml/badge.svg)](https://github.com/otariidae/seac/actions/workflows/node.js.yml)
+
 A simple command-line tool that compiles a Node.js program into single executable binary that runs without Node.js runtime installed, built on top of the Node.js [single executable application](https://nodejs.org/docs/latest/api/single-executable-applications.html) (SEA) feature.
 
 > [!NOTE]
