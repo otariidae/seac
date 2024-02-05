@@ -41,6 +41,7 @@ seac hello.js hello
 - [nexe](https://www.npmjs.com/package/nexe)
 - [boxednode](https://www.npmjs.com/package/boxednode)
 - [caxa](https://www.npmjs.com/package/caxa)
+- [List of existing solutions on Node.js SEA team repository](https://github.com/nodejs/single-executable/blob/main/docs/existing-solutions.md)
 
 ## License
 
