@@ -22,7 +22,7 @@
     "url": "https://github.com/otariidae/seac/issues"
   },
   "dependencies": {
-    "esbuild": "^0.19.11",
+    "esbuild": "^0.25.0",
     "setil": "^0.0.1-a",
     "zod-opts": "^0.1.6"
   },
