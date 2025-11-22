@@ -29,5 +29,6 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm test
+    - run: npm run typecheck
     - name: build testing
       run: npm run build

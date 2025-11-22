@@ -10,7 +10,8 @@
     "build": "tsc",
     "fmt": "biome format --write .",
     "lint": "biome lint .",
-    "test": "ts-node test/cli.ts"
+    "test": "node -r esbuild-register --test test/cli.ts",
+    "typecheck": "tsc --noEmit"
   },
   "author": "otariidae",
   "license": "Apache-2.0",
@@ -29,7 +30,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.5.1",
     "@types/node": "^24.9.1",
-    "ts-node": "^10.9.2",
+    "esbuild-register": "^3.6.0",
     "typescript": "^5.3.3"
   }
 }
