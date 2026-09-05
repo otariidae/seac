@@ -33,6 +33,29 @@ test("selects the native builder from Node.js v25.5.0", () => {
     assert.equal(selectSeaBuilder("invalid"), "legacy")
 })
 
+test("rejects missing positional arguments", () => {
+    const result = spawnSync(process.execPath, [
+        "-r",
+        "esbuild-register",
+        path.join(__dirname, "../src/cli.ts"),
+    ])
+
+    assert.equal(result.status, 1)
+})
+
+test("rejects excess positional arguments", () => {
+    const result = spawnSync(process.execPath, [
+        "-r",
+        "esbuild-register",
+        path.join(__dirname, "../src/cli.ts"),
+        "source.js",
+        "output",
+        "unexpected",
+    ])
+
+    assert.equal(result.status, 1)
+})
+
 test(
     "reports native builder failures with command context",
     { skip: selectSeaBuilder(process.versions.node) !== "native" },
