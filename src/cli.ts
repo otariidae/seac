@@ -1,9 +1,8 @@
 #!/usr/bin/env node
-import os from "node:os"
-import * as setil from "setil"
 import { z } from "zod"
 import { parser } from "zod-opts"
 import * as esbuild from "esbuild"
+import { compileSea } from "./sea"
 
 export async function run(argv2: string[]) {
     const args = parser()
@@ -24,6 +23,7 @@ export async function run(argv2: string[]) {
     const bundled = await esbuild.build({
         bundle: true,
         entryPoints: [args.srcPath],
+        format: "cjs",
         platform: "node",
         write: false,
     })
@@ -32,9 +32,7 @@ export async function run(argv2: string[]) {
     }
     // compile the bundled code into single executable
     const bundledCode = bundled.outputFiles[0].text
-    await setil.compile(bundledCode, args.destPath, {
-        noSign: os.type() === "Windows_NT", // remove PE signature only when Windows
-    })
+    await compileSea(bundledCode, args.destPath)
 }
 
 if (require.main === module) {
