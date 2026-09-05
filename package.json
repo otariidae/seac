@@ -3,15 +3,19 @@
   "description": "single executable application compiler",
   "version": "0.2.1",
   "bin": "dist/cli.js",
+  "files": [
+    "dist"
+  ],
   "engines": {
-    "node": ">= 20"
+    "node": ">= 22"
   },
   "scripts": {
     "build": "tsc",
     "fmt": "biome format --write .",
     "lint": "biome lint .",
     "test": "node -r esbuild-register --test test/cli.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "author": "otariidae",
   "license": "Apache-2.0",
@@ -24,12 +28,14 @@
   },
   "dependencies": {
     "esbuild": "^0.28.1",
+    "semver": "^7.8.5",
     "setil": "^0.0.1-a",
     "zod-opts": "^0.1.6"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.5.1",
     "@types/node": "^24.9.1",
+    "@types/semver": "^7.8.0",
     "esbuild-register": "^3.6.0",
     "typescript": "^5.3.3"
   }

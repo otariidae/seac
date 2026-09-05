@@ -4,11 +4,10 @@
 [![GitHub License](https://img.shields.io/github/license/otariidae/seac)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Node.js CI](https://github.com/otariidae/seac/actions/workflows/node.js.yml/badge.svg)](https://github.com/otariidae/seac/actions/workflows/node.js.yml)
 
-A simple command-line tool that compiles a Node.js program into single executable binary that runs without Node.js runtime installed, built on top of the Node.js [single executable application](https://nodejs.org/docs/latest/api/single-executable-applications.html) (SEA) feature.
+A simple command-line tool that bundles a Node.js program into a single executable binary that runs without a separate Node.js runtime. It is built on Node.js [single executable applications](https://nodejs.org/docs/latest/api/single-executable-applications.html) (SEA).
 
 > [!NOTE]
-> The Node.js SEA feature is currently still experimental according to [the official document](https://nodejs.org/docs/latest-v20.x/api/single-executable-applications.html).
-> And seac is super experimental.
+> Node.js SEA remains experimental ([Stability: 1.1](https://nodejs.org/docs/latest/api/single-executable-applications.html)). Treat generated executables as platform-specific release artifacts and test them on every target platform.
 
 ## Installation
 
@@ -32,8 +31,11 @@ seac hello.js hello
 
 ## Limitations
 
-- Requires Node.js v20 or higher
-- Only CommonJS is supported. ESM is not supported yet by the Node.js SEA feature.
+- Requires Node.js v22 or higher.
+- Node.js v26+ uses Node's native `--build-sea` command. Node.js v22 and v24 use the compatible legacy `setil`/`postject` path.
+- seac emits a single CommonJS bundle. Although Node.js v26 SEA supports an ESM main entry, this CLI does not yet expose that mode.
+- Build on the target OS and architecture. SEA code cache and snapshots are not portable across platforms; seac leaves both disabled.
+- On macOS, seac ad-hoc signs executables built through the native Node.js v26+ path. Production distribution may require your own Developer ID signing and notarization.
 
 ## Prior art
 
@@ -47,6 +49,6 @@ seac hello.js hello
 
 Apache-2.0
 
-## Technical memo
+## Technical notes
 
-Seac cannot be compiled to single executable by itself because its denendency esbuild uses uncompilable Node.js feature `require.resolve`.
+seac cannot be compiled to a single executable by itself because its dependency esbuild uses `require.resolve`, which cannot be bundled into a SEA entry point.

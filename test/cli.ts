@@ -5,6 +5,7 @@ import os from "node:os"
 import { spawnSync } from "node:child_process"
 import assert from "node:assert/strict"
 import { run } from "../src/cli"
+import { selectSeaBuilder } from "../src/sea"
 
 const osTmpdir = os.tmpdir()
 
@@ -22,6 +23,31 @@ async function compileFile(srcFilePath: string, destPath: string) {
     await fs.rm(destPath, { force: true })
     await run([srcFilePath, destPath])
 }
+
+test("selects the native builder from Node.js v25.5.0", () => {
+    assert.equal(selectSeaBuilder("22.17.0"), "legacy")
+    assert.equal(selectSeaBuilder("24.20.0"), "legacy")
+    assert.equal(selectSeaBuilder("25.4.0"), "legacy")
+    assert.equal(selectSeaBuilder("25.5.0"), "native")
+    assert.equal(selectSeaBuilder("26.0.0"), "native")
+    assert.equal(selectSeaBuilder("invalid"), "legacy")
+})
+
+test(
+    "reports native builder failures with command context",
+    { skip: selectSeaBuilder(process.versions.node) !== "native" },
+    async () => {
+        const helloJsPath = path.join(__dirname, "hello.js")
+        await using tmpdirResource = await withTmpdir(
+            path.join(osTmpdir, "seac-test-"),
+        )
+
+        await assert.rejects(
+            run([helloJsPath, tmpdirResource.tmpdir]),
+            /--build-sea.*exited with code/,
+        )
+    },
+)
 
 test("compile dependency-free common js file", async () => {
     const helloJsPath = path.join(__dirname, "hello.js")
